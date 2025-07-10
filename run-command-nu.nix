@@ -3,6 +3,7 @@
   writeText,
   nushell,
   runCommand,
+  ...
 }: name: env: buildCommand: let
   mkEnvLine = name: value: ''$env.${name} = "${value}"'';
   script = writeText "nu-script" ''

@@ -7,7 +7,7 @@
     self,
     nixpkgs,
   }: let
-    inherit (nixpkgs.lib) genAttrs;
+    inherit (nixpkgs.lib) genAttrs removeSuffix mapAttrs' nameValuePair;
     allSystems = [
       "x86_64-linux"
       "aarch64-linux"
@@ -20,8 +20,13 @@
         inherit readDirImportable;
         inherit (pkgs) callPackage;
       };
-    in
-      {inherit readDirImportable callPackagesInDirectory;} // (callPackagesInDirectory ./. pkgsSelf));
+      toCamelCase = import ./bootstrap/to-camel-case.nix {inherit (pkgs) lib;};
+      correctName = name: (toCamelCase (removeSuffix ".nix" name));
+      boostrapPackages = {inherit readDirImportable callPackagesInDirectory toCamelCase;};
+      pkgsDir = callPackagesInDirectory ./. (pkgsSelf // boostrapPackages);
+      correctedPkgsDir = mapAttrs' (name: value: nameValuePair (correctName name) value) pkgsDir;
+    in boostrapPackages // correctedPkgsDir);
+      
     formatter = genAttrs allSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   in {inherit formatter legacyPackages;};
 }

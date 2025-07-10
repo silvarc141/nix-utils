@@ -1,6 +1,7 @@
 {
   writeTextFile,
   nushell,
+  ...
 }: name: text:
 writeTextFile {
   inherit name;

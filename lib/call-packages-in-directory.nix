@@ -1,4 +1,4 @@
-{pkgs, pkgsSelf}:{directory, dependencies}:let
+{pkgs, pkgsSelf}:directory: dependencies: let
   paths = builtins.attrNames (pkgsSelf.lib.readDirImportable directory);
   mkOutput = path: {
     name = path;

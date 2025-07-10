@@ -1,5 +1,5 @@
 {
-  description = ''"Practical Demonology For Two" card game'';
+  description = "Generic helpers usable across my different personal projects.";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 

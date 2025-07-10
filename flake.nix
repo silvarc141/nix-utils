@@ -21,7 +21,7 @@
         inherit (pkgs) callPackage;
       };
     in
-      {inherit readDirImportable callPackagesInDirectory;} // callPackagesInDirectory ./. pkgsSelf);
+      {inherit readDirImportable callPackagesInDirectory;} // (callPackagesInDirectory ./. pkgsSelf));
     formatter = genAttrs allSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   in {inherit formatter legacyPackages;};
 }

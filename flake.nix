@@ -1,5 +1,5 @@
 {
-  description = "Generic helpers usable across my different personal projects.";
+  description = "Generic helper functions usable across my different personal projects.";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
@@ -12,12 +12,16 @@
       "x86_64-linux"
       "aarch64-linux"
     ];
-    legacyPackages = genAttrs allSystems (system:
-      import ./lib {
-        pkgs = nixpkgs.legacyPackages.${system};
-        pkgsSelf = self.legacyPackages.${system};
-      });
+    legacyPackages = genAttrs allSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      pkgsSelf = self.legacyPackages.${system};
+      readDirImportable = import ./bootstrap/read-dir-importable.nix {inherit (pkgs) lib;};
+      callPackagesInDirectory = import ./bootstrap/call-packages-in-directory.nix {
+        inherit readDirImportable;
+        inherit (pkgs) callPackage;
+      };
+    in
+      {inherit readDirImportable callPackagesInDirectory;} // callPackagesInDirectory ./. pkgsSelf);
     formatter = genAttrs allSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    defaultPackage = genAttrs allSystems (system: self.legacyPackages.${system}.lib);
-  in {inherit formatter legacyPackages defaultPackage;};
+  in {inherit formatter legacyPackages;};
 }

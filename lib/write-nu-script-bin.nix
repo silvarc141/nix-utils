@@ -1,4 +1,4 @@
-{pkgs}: name: text:
+{pkgs, pkgsSelf}: name: text:
 pkgs.writeTextFile {
   inherit name;
   executable = true;

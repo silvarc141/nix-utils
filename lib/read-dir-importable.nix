@@ -1,4 +1,4 @@
-{pkgs}: pathToDir: let
+{pkgs, pkgsSelf}: pathToDir: let
   inherit (pkgs.lib) filterAttrs;
   forbiddenFileNames = [
     "default.nix"

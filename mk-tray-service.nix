@@ -1,9 +1,10 @@
 {
   lib,
+  ...
+}:{
   command,
   description,
   settings ? {},
-  ...
 }: (lib.recursiveUpdate {
     Unit = {
       Description = description;

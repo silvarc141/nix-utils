@@ -1,1 +1,1 @@
-{...}:x: builtins.trace x x
+{...}: x: builtins.trace x x

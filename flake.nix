@@ -1,5 +1,5 @@
 {
-  description = "Generic helper functions usable across my different personal projects.";
+  description = "A collection of helper functions usable across my different personal projects.";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
@@ -25,8 +25,9 @@
       boostrapPackages = {inherit readDirImportable callPackagesInDirectory toCamelCase;};
       pkgsDir = callPackagesInDirectory ./. (pkgsSelf // boostrapPackages);
       correctedPkgsDir = mapAttrs' (name: value: nameValuePair (correctName name) value) pkgsDir;
-    in boostrapPackages // correctedPkgsDir);
-      
+    in
+      boostrapPackages // correctedPkgsDir);
+
     formatter = genAttrs allSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   in {inherit formatter legacyPackages;};
 }

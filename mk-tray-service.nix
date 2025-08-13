@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}:{
+{lib, ...}: {
   command,
   description,
   settings ? {},

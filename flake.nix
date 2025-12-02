@@ -1,7 +1,7 @@
 {
   description = "A collection of helper functions usable across my different personal projects.";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
   outputs = {
     self,

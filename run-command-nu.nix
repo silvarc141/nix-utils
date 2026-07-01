@@ -12,4 +12,4 @@
     ${buildCommand}
   '';
 in
-  runCommand name env ''${nushell}/bin/nu ${script}''
+  runCommand name env "${nushell}/bin/nu ${script}"

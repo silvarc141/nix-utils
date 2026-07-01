@@ -11,9 +11,14 @@
   plugins ? [],
 }: let
   nuWithPlugins =
-    runCommand "${name}-nu-wrapper" {
-      nativeBuildInputs = [nushell makeWrapper];
-    } ''
+    runCommand "${name}-nu-wrapper"
+    {
+      nativeBuildInputs = [
+        nushell
+        makeWrapper
+      ];
+    }
+    ''
       makeWrapper ${nushell}/bin/nu $out/bin/nu --prefix PATH : ${lib.makeBinPath plugins}
     '';
 in

@@ -6,7 +6,10 @@
     Unit = {
       Description = description;
       Requires = ["tray.target"];
-      After = ["graphical-session.target" "tray.target"];
+      After = [
+        "graphical-session.target"
+        "tray.target"
+      ];
       PartOf = ["graphical-session.target"];
     };
     Service = {

@@ -4,7 +4,9 @@
   nushell,
   runCommand,
   ...
-}: name: env: buildCommand: let
+}:
+name: env: buildCommand:
+let
   mkEnvLine = name: value: ''$env.${name} = "${value}"'';
   script = writeText "nu-script" ''
     let out = $env.out
@@ -12,4 +14,4 @@
     ${buildCommand}
   '';
 in
-  runCommand name env "${nushell}/bin/nu ${script}"
+runCommand name env "${nushell}/bin/nu ${script}"

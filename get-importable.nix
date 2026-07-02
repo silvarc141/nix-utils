@@ -1,1 +1,2 @@
-{readDirImportable, ...}: pathToDir: map (x: "${pathToDir}/${x}") (builtins.attrNames (readDirImportable pathToDir))
+{ readDirImportable, ... }:
+pathToDir: map (x: "${pathToDir}/${x}") (builtins.attrNames (readDirImportable pathToDir))

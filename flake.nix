@@ -38,7 +38,7 @@
         boostrapPackages // correctedPkgsDir
       );
 
-      formatter = genAttrs allSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      formatter = genAttrs allSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     in
     {
       inherit formatter legacyPackages;

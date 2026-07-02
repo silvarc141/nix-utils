@@ -2,7 +2,8 @@
   writeTextFile,
   nushell,
   ...
-}: name: text:
+}:
+name: text:
 writeTextFile {
   inherit name;
   executable = true;

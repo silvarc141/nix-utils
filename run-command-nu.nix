@@ -1,17 +1,12 @@
 {
   lib,
-  writeText,
-  nushell,
   runCommand,
-  ...
+  nushell,
 }:
-name: env: buildCommand:
-let
-  mkEnvLine = name: value: ''$env.${name} = "${value}"'';
-  script = writeText "nu-script" ''
-    let out = $env.out
-    ${lib.concatLines (lib.mapAttrsToList mkEnvLine env)}
-    ${buildCommand}
-  '';
-in
-runCommand name env "${nushell}/bin/nu ${script}"
+name: env: script:
+runCommand name (
+  env
+  // {
+    nativeBuildInputs = (env.nativeBuildInputs or [ ]) ++ [ nushell ];
+  }
+) "nu -c ${lib.escapeShellArg script}"

@@ -2,6 +2,7 @@
   lib,
   runCommand,
   nushell,
+  ...
 }:
 name: env: script:
 runCommand name (

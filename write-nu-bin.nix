@@ -26,7 +26,7 @@ let
     "--prefix"
     "PATH"
     ":"
-    (makeBinPath plugins)
+    "${makeBinPath plugins}"
   ];
 
   conf = (builtins.removeAttrs allArgs [ "plugins" ]) // {

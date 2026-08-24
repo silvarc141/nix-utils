@@ -1,7 +1,6 @@
 # writeNuBin that allows to specify plugins
 {
   lib,
-  pkgs,
   makeScriptWriter,
   nushell,
   ...

@@ -1,5 +1,4 @@
 # writeNuBin that allows to specify plugins
-# WARNING: untested
 {
   lib,
   pkgs,

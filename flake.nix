@@ -14,6 +14,7 @@
         removeSuffix
         mapAttrs'
         nameValuePair
+        toCamelCase
         ;
       allSystems = [
         "x86_64-linux"
@@ -29,7 +30,6 @@
             inherit readDirImportable;
             inherit (pkgs) callPackage;
           };
-          toCamelCase = import ./bootstrap/to-camel-case.nix { inherit (pkgs) lib; };
           correctName = name: (toCamelCase (removeSuffix ".nix" name));
           boostrapPackages = { inherit readDirImportable callPackagesInDirectory toCamelCase; };
           pkgsDir = callPackagesInDirectory ./. (pkgsSelf // boostrapPackages);
